@@ -145,15 +145,11 @@ def main():
     model = nn.DataParallel(model).cuda()
     model.train()
 
-    if args.sgd:
-        optimizer = torch.optim.SGD(get_parameters(model),
-                                    lr=args.learning_rate,
-                                    momentum=args.momentum,
-                                    weight_decay=args.weight_decay)
-    else:
-        optimizer = torch.optim.AdamW(get_parameters(model),
-                                      lr=args.adamw_lr,
-                                      weight_decay=args.adamw_weight_decay)
+   
+    
+    optimizer = torch.optim.AdamW(get_parameters(model),
+                                    lr=args.adamw_lr,
+                                    weight_decay=args.adamw_weight_decay)
 
     if args.cos == True:
         scheduler = LambdaLR(optimizer,
